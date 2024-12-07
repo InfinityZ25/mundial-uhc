@@ -2,6 +2,7 @@ package us.jcedeno.uhc.listeners;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Statistic;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -58,7 +59,7 @@ public class LobbyListeners implements Listener {
             board.updateLines(List.of(
                     miniMessage().deserialize("<white>Time: <#f2c08e>" + formatTime(gameTime)),
                     miniMessage().deserialize(""),
-                    miniMessage().deserialize("<white>Your kills: <#f2c08e>" +  player.getStatistic(Statistic.KILL_ENTITY)),
+                    miniMessage().deserialize("<white>Your kills: <#f2c08e>" +  player.getStatistic(Statistic.KILL_ENTITY, EntityType.ZOMBIE)),
                     miniMessage().deserialize(String.format("<white>(X,Z): <#f2c08e>(%.2f, %.2f)",
                             player.getLocation().getX(), player.getLocation().getZ())),
                     miniMessage().deserialize(""),
