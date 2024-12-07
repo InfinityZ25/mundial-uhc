@@ -1,0 +1,5 @@
+name: uhc-mundial
+version: '0.0.1-SNAPSHOT'
+main: us.jcedeno.uhc.UHCPlugin
+api-version: '1.21'
+authors: [jcedeno]
