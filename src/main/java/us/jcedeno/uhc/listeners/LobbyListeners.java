@@ -9,6 +9,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import fr.mrmicky.fastboard.adventure.FastBoard;
+import lombok.Getter;
+import lombok.Setter;
 import us.jcedeno.uhc.UHCPlugin;
 
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
@@ -19,7 +21,10 @@ public class LobbyListeners implements Listener {
 
     private Integer gameTime = 0;
 
-    private boolean shouldTick = false;
+
+    @Getter
+    @Setter
+    private static boolean shouldTick = false;
 
     public LobbyListeners() {
 
@@ -44,7 +49,6 @@ public class LobbyListeners implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
-        shouldTick = true;
         var player = e.getPlayer();
 
         player.sendMessage(miniMessage().deserialize("<rainbow><hover:show_text:\"<red>test:TEST\">hello world!"));
@@ -74,9 +78,5 @@ public class LobbyListeners implements Listener {
 
     }
 
-    @EventHandler
-    public void onQuit(PlayerQuitEvent e) {
-        shouldTick = false;
-    }
 
 }

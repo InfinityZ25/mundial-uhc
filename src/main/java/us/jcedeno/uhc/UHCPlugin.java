@@ -1,11 +1,9 @@
 package us.jcedeno.uhc;
 
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.incendo.cloud.CommandManager;
 import org.incendo.cloud.annotations.AnnotationParser;
-import org.incendo.cloud.bukkit.CloudBukkitCapabilities;
 import org.incendo.cloud.execution.ExecutionCoordinator;
 import org.incendo.cloud.paper.PaperCommandManager;
 
@@ -28,26 +26,23 @@ public class UHCPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         UHCPlugin.plugin = this;
-
+    
         this.commandManager = PaperCommandManager.builder()
                 .executionCoordinator(ExecutionCoordinator.asyncCoordinator())
                 .buildOnEnable(plugin);
 
-
+        Bukkit.getPluginManager().registerEvents(new LobbyListeners(), this);
+    
         annotationParser = new AnnotationParser<>(commandManager, CommandSourceStack.class);
-
+    
         try {
             annotationParser.parse(this);
+            // Add this line to register your commands class
+            annotationParser.parse(new GameManagementCommands());
             annotationParser.parseContainers();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        System.out.println("Hello world!");
-
-        Bukkit.getPluginManager().registerEvents(new LobbyListeners(), this);
-
     }
 
     @Override
